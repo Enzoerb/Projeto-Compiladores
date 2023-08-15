@@ -34,7 +34,7 @@ termol : fator ASTRSC termol | fator BARRA termol | fator;
 
 fator : NUM | ID | TEXTO | AP expr FP;
 
-TEXTO : '"' ([0-9] | [a-z] | [A-Z] | )+ '"';
+TEXTO : '"' ([0-9] | [a-z] | [A-Z])+ '"';
 
 NUM : [0-9]+ (PF [0-9]+)?;
 
