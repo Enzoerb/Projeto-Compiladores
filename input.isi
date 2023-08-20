@@ -1,0 +1,29 @@
+programa
+
+  inteiro a;
+  decimal b, c;
+  texto t1;
+  leia(a);
+  leia(b);
+  c = 10.5;
+  t1 = aaaa;
+  
+  b = 1 + 2 * 3 / c;
+  escreva (b);
+
+  se ( b > c ) {
+     escreva (b);
+  }
+  senao {
+     escreva (c);
+  }
+
+  enquanto (a > b) {
+    leia(a);
+  }
+
+  faca {
+    leia (a);
+  } enquanto(a > b);
+
+fimprog;
