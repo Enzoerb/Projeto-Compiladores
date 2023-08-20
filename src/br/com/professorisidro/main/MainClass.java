@@ -1,11 +1,12 @@
 package br.com.professorisidro.main;
 
 
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
+
 import br.com.professorisidro.isiLanguage.exceptions.IsiSemanticException;
 import br.com.professorisidro.isiLanguage.parser.IsiLangLexer;
 import br.com.professorisidro.isiLanguage.parser.IsiLangParser;
-import org.antlr.v4.runtime.CharStreams;
-import org.antlr.v4.runtime.CommonTokenStream;
 
 /* esta é a classe que é responsável por criar a interação com o usuário
  * instanciando nosso parser e apontando para o arquivo fonte

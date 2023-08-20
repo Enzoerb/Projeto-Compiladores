@@ -8,7 +8,7 @@ double  c;
 String  t1;
 a= _key.nextInt();
 b= _key.nextDouble();
-c = 10.5;
+t1 = 2.0;
 b = 1+2*3/c;
 System.out.println(b);
 if (b>c) {
