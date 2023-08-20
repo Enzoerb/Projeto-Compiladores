@@ -24,6 +24,7 @@ grammar IsiLang;
 	private IsiSymbolTable symbolTable = new IsiSymbolTable();
 	private IsiSymbol symbol;
 	private IsiProgram program = new IsiProgram();
+	private ArrayList<Integer> _varsType = new ArrayList<Integer>();
 	private ArrayList<AbstractCommand> curThread;
 	private Stack<ArrayList<AbstractCommand>> stack = new Stack<ArrayList<AbstractCommand>>();
 	private String _readID;
@@ -42,6 +43,30 @@ grammar IsiLang;
 		if (!symbolTable.exists(id)){
 			throw new IsiSemanticException("Symbol "+id+" not declared");
 		}
+	}
+	
+	public String getTypeName(int type) {
+		switch (isiType) {
+			case 0:
+				return "DOUBLE";
+			case 1:
+				return "TEXT";
+			case 2:
+				return "INT";
+			default:
+				return "";
+		}
+	}
+	
+	public void verificaTipos(ArrayList<Integer> varTypes) {
+		int first = varTypes.get(0);
+		for (int type: varTypes) {
+			if (first != type) {
+				varTypes.removeAll(varTypes);
+				throw new IsiSemanticException("Type mismatch: getTypeName(first) and getTypeName(type)");
+			}
+		}
+		varTypes.removeAll(varTypes);
 	}
 	
 	public void exibeComandos(){
@@ -160,11 +185,14 @@ cmdescrita	: 'escreva'
 			
 cmdattrib	:  ID { verificaID(_input.LT(-1).getText());
                     _exprID = _input.LT(-1).getText();
+                    int idType = ((IsiVariable) symbolTable.get(_exprID)).getType();
+                    _varsType.add(idType);
                    } 
                ATTR { _exprContent = ""; } 
                expr 
                SC
                {
+               	verificaTipos(_varsType);
                	 CommandAtribuicao cmd = new CommandAtribuicao(_exprID, _exprContent);
 
                  IsiVariable isiVariable = (IsiVariable)symbolTable.get(_exprID);
@@ -176,12 +204,30 @@ cmdattrib	:  ID { verificaID(_input.LT(-1).getText());
 			
 			
 cmdselecao  :  'se' AP
-                    ID    { _exprDecision = _input.LT(-1).getText(); }
+                    ID    { _exprDecision = _input.LT(-1).getText(); 
+                    verificaID(_input.LT(-1).getText());
+                     int idType = ((IsiVariable) symbolTable.get(_input.LT(-1).getText())).getType();
+                    _varsType.add(idType);
+                    }
                     OPREL { _exprDecision += _input.LT(-1).getText(); }
-                    (ID | NUMBER) {_exprDecision += _input.LT(-1).getText(); }
+                    (ID | NUMBER | STRING) {
+                    _exprDecision += _input.LT(-1).getText(); 
+                    if (_input.LT(-1).getText().matches("\\d+(\\.\\d+)?"))
+										_varsType.add(IsiVariable.DOUBLE);
+					elif(_input.LT(-1).getText().matches("\\d+"))
+										_varsType.add(IsiVariable.INT);
+					elif(_input.LT(-1).getText().startsWith("\""))
+										_varsType.add(IsiVariable.TEXT);
+						else {
+									verificaID(_input.LT(-1).getText());
+									int idType = ((IsiVariable) symbolTable.get(_input.LT(-1).getText())).getType();
+                  					  _varsType.add(idType);
+									}
+                    }
                     FP 
                     ACH 
-                    { curThread = new ArrayList<AbstractCommand>(); 
+                    { verificaTipos(_varsType);
+                      curThread = new ArrayList<AbstractCommand>(); 
                       stack.push(curThread);
                     }
                     (cmd)+ 
@@ -230,7 +276,10 @@ cmdrepeticaodowhile : 'faca'
 				}
 
 				FP
-					{   commandDoWhileList = stack.pop();
+					{ 
+					
+					verificaTipos(_varsType);   
+					commandDoWhileList = stack.pop();
 						CommandRepeticaoDoWhile cmd = new CommandRepeticaoDoWhile(_exprRepeticaoDoWhile, commandDoWhileList);
 						stack.peek().add(cmd);
 					}
@@ -242,14 +291,31 @@ cmdrepeticaowhile : 'enquanto' 	AP
                 ID {
                     verificaID( _input.LT(-1).getText() );
                     _exprRepeticaoWhile = _input.LT(-1).getText();
+                    int idType = ((IsiVariable) symbolTable.get(_input.LT(-1).getText())).getType();
+                    _varsType.add(idType);
                 }
 
                 OPREL {
                     _exprRepeticaoWhile += _input.LT(-1).getText();
                 }
 
-                (ID | NUMBER) {
+                (ID | NUMBER | STRING) {
                     _exprRepeticaoWhile += _input.LT(-1).getText();
+                    
+                     if (_input.LT(-1).getText().matches("\\d+(\\.\\d+)?")){
+										_varsType.add(IsiVariable.DOUBLE);}
+					elif(_input.LT(-1).getText().matches("\\d+")){
+										_varsType.add(IsiVariable.INT);}
+					elif(_input.LT(-1).getText().startsWith("\"")){
+										_varsType.add(IsiVariable.TEXT);}
+						else {
+									verificaID(_input.LT(-1).getText());
+									int idType = ((IsiVariable) symbolTable.get(_input.LT(-1).getText())).getType();
+                  					  _varsType.add(idType);
+									}
+                    
+                    verificaTipos(_varsType);
+                    
                 }
 
                 FP
@@ -278,11 +344,19 @@ expr		:  termo (
 			
 termo		: ID { verificaID(_input.LT(-1).getText());
 	               _exprContent += _input.LT(-1).getText();
+	               int idType = ((IsiVariable) symbolTable.get(_input.LT(-1).getText())).getType();
+                  _varsType.add(idType);
                  } 
             | 
               NUMBER
               {
+                 _varsType.add(IsiVariable.DOUBLE);
               	_exprContent += _input.LT(-1).getText();
+              }
+            |
+              STRING {
+					    _varsType.add(IsiVariable.TEXT);
+              		    _exprContent += _input.LT(-1).getText();
               }
 			;
 			
@@ -320,5 +394,8 @@ ID	: [a-z] ([a-z] | [A-Z] | [0-9])*
 	
 NUMBER	: [0-9]+ ('.' [0-9]+)?
 		;
+	
+STRING : '"' ( '\\"' | . )*? '"'
+	   ;
 		
 WS	: (' ' | '\t' | '\n' | '\r') -> skip;
