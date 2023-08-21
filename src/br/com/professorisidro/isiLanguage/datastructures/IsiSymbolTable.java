@@ -23,6 +23,21 @@ public class IsiSymbolTable {
 	public IsiSymbol get(String symbolName) {
 		return map.get(symbolName);
 	}
+
+	public boolean verifyInitialization(String id) {
+		IsiSymbol isiSymbol = this.get(id);
+		return isiSymbol.isInitialized();
+	}
+
+	public boolean verifyUseWithoutInitialization(String id) {
+		IsiVariable isiVariable = (IsiVariable) this.get(id);
+		return isiVariable.getWasUsed();
+	}
+
+	public void setAsInitialized(String id) {
+		IsiVariable isiVariable = (IsiVariable) this.get(id);
+		isiVariable.setInitialized();
+	}
 	
 	public ArrayList<IsiSymbol> getAll(){
 		ArrayList<IsiSymbol> lista = new ArrayList<IsiSymbol>();

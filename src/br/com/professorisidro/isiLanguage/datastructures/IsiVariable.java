@@ -8,11 +8,11 @@ public class IsiVariable extends IsiSymbol {
 
     private int type;
     private String value;
-    private Boolean wasInitialized;
+    private Boolean wasUsed;
 
     public IsiVariable(String name, int type, String value) {
         super(name);
-        wasInitialized = false;
+        wasUsed = false;
         this.type = type;
         this.value = value;
     }
@@ -33,12 +33,12 @@ public class IsiVariable extends IsiSymbol {
         this.value = value;
     }
 
-    public void setWasInitialized(Boolean wasInitialized) {
-        this.wasInitialized = wasInitialized;
+    public void setWasUsed(Boolean wasInitialized) {
+        this.wasUsed = wasInitialized;
     }
 
-    public Boolean getWasInitialized() {
-        return this.wasInitialized;
+    public Boolean getWasUsed() {
+        return this.wasUsed;
     }
 
     @Override

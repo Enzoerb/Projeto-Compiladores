@@ -20,10 +20,11 @@ FCH=19
 OPREL=20
 ID=21
 NUMBER=22
-STRING=23
-WS=24
+NUMBERONLYINT=23
+STRING=24
+WS=25
 'programa'=1
-'fimprog;'=2
+'fimprog.'=2
 'inteiro'=3
 'decimal'=4
 'texto'=5
@@ -35,8 +36,8 @@ WS=24
 'enquanto'=11
 '('=12
 ')'=13
-';'=14
-'='=16
+'.'=14
+':='=16
 ','=17
 '{'=18
 '}'=19

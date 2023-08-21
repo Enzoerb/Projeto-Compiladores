@@ -1,6 +1,8 @@
 package br.com.professorisidro.main;
 
 
+import br.com.professorisidro.isiLanguage.datastructures.IsiSymbol;
+import br.com.professorisidro.isiLanguage.datastructures.IsiVariable;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 
@@ -19,10 +21,11 @@ public class MainClass {
         try {
             IsiLangLexer lexer;
             IsiLangParser parser;
+            int a;
+            a = 2;
 
             // leio o arquivo "input.isi" e isso é entrada para o Analisador Lexico
             lexer = new IsiLangLexer(CharStreams.fromFileName("input.isi"));
-
             // crio um "fluxo de tokens" para passar para o PARSER
             CommonTokenStream tokenStream = new CommonTokenStream(lexer);
 

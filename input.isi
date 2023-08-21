@@ -1,29 +1,27 @@
 programa
 
-  inteiro a;
-  decimal b, c;
-  texto t1;
-  leia(a);
-  leia(b);
-  
-  t1 = 2.0;
-  
-  b = 1 + 2 * 3 / c;
-  escreva (b);
+  inteiro a.
+  decimal b, c, d, e, f.
+  texto t1.
+  a := 2.
+  e := 1.0.
+  d := 1.0.
+  c := 1.0.
+  b := c/d.
 
-  se ( b > c ) {
-     escreva (b);
+  se ( e < b ) {
+     escreva (b).
   }
   senao {
-     escreva (c);
+     escreva (e).
   }
-
-  enquanto (a > b) {
-    leia(a);
+  d := 1.0.
+  enquanto (d > b) {
+    leia(b).
   }
 
   faca {
-    leia (a);
-  } enquanto(a > b);
+    leia (b).
+  } enquanto(e > b).
 
-fimprog;
+fimprog.

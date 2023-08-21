@@ -5,21 +5,25 @@ public class MainClass{
 int  a;
 double  b;
 double  c;
+double  d;
+double  e;
+double  f;
 String  t1;
-a= _key.nextInt();
-b= _key.nextDouble();
-t1 = 2.0;
-b = 1+2*3/c;
-System.out.println(b);
-if (b>c) {
+a = 2;
+e = 1.0;
+d = 1.0;
+c = 1.0;
+b = c/d;
+if (e<b) {
 System.out.println(b);}else {
-System.out.println(c);}
+System.out.println(e);}
 
+d = 1.0;
 
-while (a>b) {
-a= _key.nextInt();}
+while (d>b) {
+b= _key.nextDouble();}
 
 do {
-a= _key.nextInt();} while (a>b);
+b= _key.nextDouble();} while (e>b);
 
   }}
