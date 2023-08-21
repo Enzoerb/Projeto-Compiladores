@@ -10,8 +10,9 @@
 ## Itens implementados no Projeto
 Checklist Inicial:
 
-- ✅ Possuir 2 tipos de variáveis 
+- ✅ Possuir 3 tipos de variáveis 
     - ✅ int
+    - ✅ double
     - ✅ string
 - ✅ Possuir a estrutura if/else
 - ✅ Possuir pelo menos 2 estrutura de repetição 
@@ -22,8 +23,8 @@ Checklist Inicial:
 - Verificar Atribuições com compatibilidade de tipos (semântica)
 - ✅ Possuir operações de Entrada e Saída
 - ✅ Aceita números decimais
-- Verificar declaração de variáveis (não usar variáveis que não foram declaradas)
+- ✅ Verificar declaração de variáveis, não usar variáveis que não foram declaradas (exception)
+- ✅ Verificar inicializacao de variaveis usadas. (exception)
 - ✅ Verificar se há variáveis declaradas e não-utilizadas ou sem valor inicial (warning)
 - Gerador de código
   - ✅ Java
-  - Outra linguagem
