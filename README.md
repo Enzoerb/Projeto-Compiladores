@@ -4,6 +4,7 @@
 ## Integrantes do Grupo
 - Enzo Erbert | RA: 11201920138
 - Matheus Rodrigues | RA: 11202022170
+- Sara Batista dos Santos Felix | RA: 11201921105
 - Luan Fazito Jurado Acarino | RA: 11201920279
 
 ## Itens implementados no Projeto
