@@ -1,27 +1,10 @@
 programa
 
-  inteiro a.
-  decimal b, c, d, e, f.
-  texto t1.
-  a := 2.
-  e := 1.0.
-  d := 1.0.
-  c := 1.0.
-  b := c/d.
+  decimal a, b, c, d.
 
-  se ( e < b ) {
-     escreva (b).
-  }
-  senao {
-     escreva (e).
-  }
-  d := 1.0.
-  enquanto (d > b) {
-    leia(b).
-  }
+  a := 2.0.
+  d := 3.0.
 
-  faca {
-    leia (b).
-  } enquanto(e > b).
+  leia(c).
 
 fimprog.

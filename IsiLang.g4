@@ -43,7 +43,7 @@ grammar IsiLang;
 	
 	public void verificaID(String id){
 		if (!symbolTable.exists(id)){
-			throw new IsiSemanticException("Symbol "+ id +" not declared");
+			throw new IsiSemanticException("Exception: The symbol "+ id +" not declared");
 		}
 	}
 	

@@ -17,7 +17,7 @@ public class CommandLeitura extends AbstractCommand {
 
         if (var.getType() == IsiVariable.DOUBLE) return id +"= _key.nextDouble();";
         if (var.getType() == IsiVariable.INT) return id +"= _key.nextInt();";
-        if (var.getType() == IsiVariable.TEXT) return id +"= _key.nextLINE();";
+        if (var.getType() == IsiVariable.TEXT) return id +"= _key.nextLine();";
         else return null;
     }
 
